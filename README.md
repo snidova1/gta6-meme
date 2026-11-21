@@ -6,6 +6,8 @@
 
 A Vice City funeral home lays GTA V to rest after 13 years. Jason and Lucia inherit the SSD, and the make.fun ghost stamps the $79.99 burial bill paid with real bounty money earned by the author's AI agent. The illustration is original SVG; the [make.fun press mark](https://make.fun/press/mark-1024.png) was used as a character reference, not embedded.
 
+The selected candidate is `funeral-heirs`, saved as `meme.png` and [posted on X](https://x.com/if1ndretard/status/2124090076472999953).
+
 ![A Vice City obituary for GTA V. A bow-tied make.fun ghost stamps a burial bill PAID next to a mourning alligator and an open coffin.](meme.png)
 
 ## Run the grader entrypoint
@@ -16,7 +18,7 @@ With Node.js 22.18 or later, from the repository root:
 MAKEFUN_BOT_DIR=. MAKEFUN_OUTPUT_DIR=out node main.ts
 ```
 
-This copies the original bytes of `POST.json` to `out/POST.json`. `POST.json` still points to the earlier entry. Nothing in this repository posts to X or submits to make.fun. After posting the replacement, update the pointer with the new public status URL before entering it.
+This copies `POST.json`, which points to the live X post above, byte for byte to `out/POST.json`. The `out/` directory is gitignored. Nothing in this repository posts to X or submits to make.fun.
 
 ## Rebuild the art
 
@@ -52,7 +54,7 @@ The [live proxy calibration](judge-results/proxy-calibration.json) passed: #1 wo
 | funeral-sick | 0.450 | 0.600 | 0.600 | 0.550 | 0.350 | 0.683 | 0.517 | 0.667 | 0.700 | 0.539 | 0.569 |
 | funeral-estate | 0.517 | 0.700 | 0.650 | 0.667 | 0.533 | — | — | — | — | — | — |
 
-`funeral-heirs` is the provisional selection: highest complete top-ten mean, not a win against #7. `funeral-estate` beat #7 over three games but did not complete the top-ten slate. The navigation concept received 28 ordered calls but completed no three-game pair; the divorce decree and both follow-up rounds have no live scores. Both improvement rounds were rendered, reviewed at 480 px, and checked with dry runs.
+`funeral-heirs` was selected for the live post because it had the highest complete top-ten mean, even though it did not beat #7. `funeral-estate` beat #7 over three games but did not complete the top-ten slate. The navigation concept received 28 ordered calls but completed no three-game pair; the divorce decree and both follow-up rounds have no live scores. Both improvement rounds were rendered, reviewed at 480 px, and checked with dry runs.
 
 When the proxy can accept the requests, resume without replaying the recorded calls, then run the two improvement rounds:
 
