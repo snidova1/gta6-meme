@@ -45,7 +45,7 @@ Calibration defaults to six two-order games per pair, comparing #1 with #800 and
 
 ## Results and selection
 
-The [live proxy calibration](judge-results/proxy-calibration.json) passed: #1 won 6/6 calls against #800, and #869 lost 6/6 against #100. The earlier one-game [baseline](judge-results/tournament-initial.json) and [funeral revisions](judge-results/tournament-funeral-r1-funeral-r2-funeral-r3.json) are retained separately. The new [three-game tournament](judge-results/tournament-launch.json) stopped after 239 of 702 ordered calls could be recorded without a blocking error. The proxy repeatedly returned HTTP 402; the latest failures indicated credits or balance. Only fully played pairs are shown here.
+The judge's raw result files are generated output, so `judge-results/` is gitignored and kept locally; the numbers below are copied from them. The live proxy calibration passed: #1 won 6/6 calls against #800, and #869 lost 6/6 against #100. The three-game tournament stopped after 239 of 702 ordered calls could be recorded without a blocking error. The proxy repeatedly returned HTTP 402; the latest failures indicated credits or balance. Only fully played pairs are shown here.
 
 | Candidate | #1 | #2 | #3 | #5 | #7 | #10 | #20 | #50 | #100 | Top 10 | All |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |

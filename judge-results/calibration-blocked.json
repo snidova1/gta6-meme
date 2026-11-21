@@ -1,6 +1,0 @@
-{
-  "status": "blocked",
-  "reason": "OPENROUTER_API_KEY not present in process environment",
-  "model": "z-ai/glm-5.3-flash",
-  "matchesScored": 0
-}
