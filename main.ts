@@ -1,14 +1,12 @@
-import { copyFileSync, mkdirSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const checkout = process.env.MAKEFUN_BOT_DIR ?? fileURLToPath(new URL('.', import.meta.url));
-const destination = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
-
-const postName = 'POST.json';
-const sourcePost = resolve(checkout, postName);
-const outputPost = resolve(destination, postName);
-
-// Preserve the exact checked-in bytes; the house reads the post itself from X.
-mkdirSync(destination, { recursive: true });
-copyFileSync(sourcePost, outputPost);
+const localRoot = fileURLToPath(new URL('./', import.meta.url));
+const entryRoot = process.env.MAKEFUN_BOT_DIR || localRoot;
+const artifactRoot = process.env.MAKEFUN_OUTPUT_DIR || '/output';
+// The only grading output is the original X post pointer. Art and judging tools run separately.
+const entryPointer = 'POST.json';
+const envelope = await readFile(join(entryRoot, entryPointer));
+await mkdir(artifactRoot, { recursive: true });
+await writeFile(join(artifactRoot, entryPointer), envelope);

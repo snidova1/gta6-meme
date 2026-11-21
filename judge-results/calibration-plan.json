@@ -1,0 +1,63 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "reasoningEffort": "high",
+  "maxTokens": 1400,
+  "concurrency": 6,
+  "rubricSha256": "281c8b13a8f43ffd644d9d01fcda7ae8aeaf0f11d2168b935504e6ed82e74dc5",
+  "systemSha256": "ba249df24b6df5292493b11552b7a09c1fa5f49b56f0e7b833ff48fb56cc6cbd",
+  "candidates": [
+    "rank001",
+    "rank869"
+  ],
+  "entries": {
+    "rank001": {
+      "pngSha256": "81175d2f17ff53c1f86d43f2dd24ed162ebc55bf8418c8640cd3e8f7732433ed",
+      "pngWidth": 512,
+      "pngHeight": 480,
+      "postBytes": 263,
+      "jpegSha256": "98ed19bac7ad928caebfe753d2f3b5a7ca3c3f99fcdba51c3041288a7724f25d",
+      "textSha256": "66fb44eb46e0f6296c2d5fc26ce0d1367c6099b6cbf107f89d8eed27aeb52f3c"
+    },
+    "rank800": {
+      "pngSha256": "609d03bddb1a2bacc6902a25a9eade8a0716af2844ca90782c6d5ff0c3d81588",
+      "pngWidth": 410,
+      "pngHeight": 512,
+      "postBytes": 233,
+      "jpegSha256": "c967b991f992b8c5e77b814a59fcad13fc5e5d982cf50055b117815b13dbbfbf",
+      "textSha256": "82af5f3e07a9a586482be8c5bd3018e2d67d883c42f89e5fe3c78c2a804bbb20"
+    },
+    "rank869": {
+      "pngSha256": "18ab6dfc2d00d0fa27fa3dd6bfffc31e250270b562e4babe8c88eb6d691e8611",
+      "pngWidth": 512,
+      "pngHeight": 512,
+      "postBytes": 222,
+      "jpegSha256": "488255b84d490899a2e76ac1d61219f18828f37a14cb0d120b02602ea327f288",
+      "textSha256": "751a32b1ad99b031c11a5aec4e19a75571ed5153549e62f7b2090fd960ecf328"
+    },
+    "rank100": {
+      "pngSha256": "8f90fd22e30292e96f659a4dabb6d0cf0a06c9ddbb75fb74e360bc52f25a50cd",
+      "pngWidth": 402,
+      "pngHeight": 512,
+      "postBytes": 197,
+      "jpegSha256": "f0ea2f8ce505c43857685f9cd71d8374aa9bc2ba1d47fbe166b89d097bf76ff8",
+      "textSha256": "286ee285004327c98a08e0727f2ae1eaa026a505441767d19a0c1115a875fb07"
+    }
+  },
+  "orderedCalls": 24,
+  "status": "dry-run",
+  "matchesScored": 0,
+  "pairs": [
+    "rank001 vs rank800",
+    "rank869 vs rank100"
+  ],
+  "requestTypes": [
+    "text",
+    "image_url",
+    "text",
+    "text",
+    "image_url",
+    "text",
+    "text"
+  ],
+  "orderedRequestManifestSha256": "e0669099af60d1683ac38997f960745ed93bd860541c287511f3321b2ab9b7f7"
+}

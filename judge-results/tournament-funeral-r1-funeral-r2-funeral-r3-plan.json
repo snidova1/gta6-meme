@@ -1,0 +1,153 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "reasoningEffort": "high",
+  "maxTokens": 1400,
+  "concurrency": 6,
+  "rubricSha256": "281c8b13a8f43ffd644d9d01fcda7ae8aeaf0f11d2168b935504e6ed82e74dc5",
+  "systemSha256": "ba249df24b6df5292493b11552b7a09c1fa5f49b56f0e7b833ff48fb56cc6cbd",
+  "candidates": [
+    "funeral-r1",
+    "funeral-r2",
+    "funeral-r3"
+  ],
+  "entries": {
+    "funeral-r1": {
+      "pngSha256": "cfa694833f17c57fa3e7ea90f736f80138448af5d76cc722c7bc52de8ef69f35",
+      "pngWidth": 1200,
+      "pngHeight": 1200,
+      "postBytes": 191,
+      "jpegSha256": "bf55de1662297c426d174b6071f8f318d7d745ca4ca44bf09b7ed69c79630168",
+      "textSha256": "15a029e161fb8a3c2a32e2d60e891fd09182287fc4cf6d99fb0e21e07587d653"
+    },
+    "rank001": {
+      "pngSha256": "81175d2f17ff53c1f86d43f2dd24ed162ebc55bf8418c8640cd3e8f7732433ed",
+      "pngWidth": 512,
+      "pngHeight": 480,
+      "postBytes": 263,
+      "jpegSha256": "98ed19bac7ad928caebfe753d2f3b5a7ca3c3f99fcdba51c3041288a7724f25d",
+      "textSha256": "66fb44eb46e0f6296c2d5fc26ce0d1367c6099b6cbf107f89d8eed27aeb52f3c"
+    },
+    "rank002": {
+      "pngSha256": "1d5bc024ed97c32b2ff440127c1808918fd3b2056caea0969294a7e08a6df429",
+      "pngWidth": 512,
+      "pngHeight": 512,
+      "postBytes": 193,
+      "jpegSha256": "708a1c960699806257420c4ef4a7ac0cef6a89820aa2efac747ada4b2da1e65b",
+      "textSha256": "467748dc60d5c566c739851d98cbd6269b1b7e58a4b7d05460a0967853ac480a"
+    },
+    "rank003": {
+      "pngSha256": "58d7fb3e92dfb1a6a7e493bfeac9429cadf0d6e6ef6220288c6a11ddfbee4c91",
+      "pngWidth": 512,
+      "pngHeight": 512,
+      "postBytes": 292,
+      "jpegSha256": "a26dd6de7a9609bf195ab24871f1863a0a699ad62361be462036f9e9fbd161d7",
+      "textSha256": "c17c2cffae0f8b35eaef819cb1a55bf586871aafb2176bde3f85e4a0f22de749"
+    },
+    "rank005": {
+      "pngSha256": "cdca812c64e6c60e87e91e770b3512f479aee61f33a06d5b56539d22cfc2e5ea",
+      "pngWidth": 512,
+      "pngHeight": 512,
+      "postBytes": 258,
+      "jpegSha256": "78253153066949fdb72247e7a8fab106813f2c2f3f1d9020ef79d9c99acd7784",
+      "textSha256": "b14dba1a63143a534170559ee37d440966470cb5ee54ccbb938f90289009f130"
+    },
+    "rank007": {
+      "pngSha256": "1df1279863b1c89c842817bcf85541315e3b18415b7fb550634cf17f86d43931",
+      "pngWidth": 512,
+      "pngHeight": 320,
+      "postBytes": 248,
+      "jpegSha256": "aa03172865c4eb8c2f74c55e82f383167ef991a25297a5c3cc7e7f87362d7231",
+      "textSha256": "4c9ca690c33c49cb3bdc36d15f237ae23768a5beffc3aff4b676f042b7083280"
+    },
+    "rank010": {
+      "pngSha256": "2f542dda3b2784d2d4a00e7948aeb49923d65cd9c0f7dbc9a7ea3f4e11aac8cc",
+      "pngWidth": 512,
+      "pngHeight": 512,
+      "postBytes": 255,
+      "jpegSha256": "8efcfc8a9e25ed3e492a501a2c9854d7b82623a039820a3d6d142fab2294a112",
+      "textSha256": "4c789582467af89658ae35aff1712c7f5da19467cd689a0a1973d0682cebbb47"
+    },
+    "rank020": {
+      "pngSha256": "d8566eb5141ee0782dd30110f90063741a83ea9935e058bc758bb6df584c69e1",
+      "pngWidth": 512,
+      "pngHeight": 512,
+      "postBytes": 267,
+      "jpegSha256": "0aa6838733ccdf82d4782175926bb8ad2b672b1aa4c5e4654dc8dcaa04903fb5",
+      "textSha256": "4757dbc2d5bc38affe616137f9b9f72eb53558fe75c80111381bfb4c9abde924"
+    },
+    "rank050": {
+      "pngSha256": "df14ec998a827b912a74e1be66a5aee6cc1b4f69b71101bbd27df166f0142704",
+      "pngWidth": 512,
+      "pngHeight": 512,
+      "postBytes": 251,
+      "jpegSha256": "207aa62ca93c1b13b7b55005817b0053224b6191939dd709f043c57e891d11ec",
+      "textSha256": "876cb6cf656af35e9cec7f89d4e70c9754135a92c8e4846138e54ba244f3197c"
+    },
+    "rank100": {
+      "pngSha256": "8f90fd22e30292e96f659a4dabb6d0cf0a06c9ddbb75fb74e360bc52f25a50cd",
+      "pngWidth": 402,
+      "pngHeight": 512,
+      "postBytes": 197,
+      "jpegSha256": "f0ea2f8ce505c43857685f9cd71d8374aa9bc2ba1d47fbe166b89d097bf76ff8",
+      "textSha256": "286ee285004327c98a08e0727f2ae1eaa026a505441767d19a0c1115a875fb07"
+    },
+    "funeral-r2": {
+      "pngSha256": "690f1f68298d47133776fa6b52a7279a4fb7dfdb07abffdf6832cef3df0a9262",
+      "pngWidth": 1200,
+      "pngHeight": 1200,
+      "postBytes": 211,
+      "jpegSha256": "2f629f231c7737d223c79533c3a2f30c97583ae26a53cc3324385804e61be527",
+      "textSha256": "5740f648f161b0e692330ffe3e50b0f96777404e45ed9c84cc27cdeeff9fb4bc"
+    },
+    "funeral-r3": {
+      "pngSha256": "31341f24111f3702a8f095b7343e9ad75dd40990ff6a7e69d341b1d8d7459ad8",
+      "pngWidth": 1200,
+      "pngHeight": 1200,
+      "postBytes": 206,
+      "jpegSha256": "a44f8dae07ec2d8666f4c67368c19d9b03c201e7f31fa282522870da380f8335",
+      "textSha256": "303173ac70026f251d200a56576aa27da90131fba11887c72c1e4affcbc164d6"
+    }
+  },
+  "orderedCalls": 54,
+  "status": "dry-run",
+  "matchesScored": 0,
+  "pairs": [
+    "funeral-r1 vs rank001",
+    "funeral-r1 vs rank002",
+    "funeral-r1 vs rank003",
+    "funeral-r1 vs rank005",
+    "funeral-r1 vs rank007",
+    "funeral-r1 vs rank010",
+    "funeral-r1 vs rank020",
+    "funeral-r1 vs rank050",
+    "funeral-r1 vs rank100",
+    "funeral-r2 vs rank001",
+    "funeral-r2 vs rank002",
+    "funeral-r2 vs rank003",
+    "funeral-r2 vs rank005",
+    "funeral-r2 vs rank007",
+    "funeral-r2 vs rank010",
+    "funeral-r2 vs rank020",
+    "funeral-r2 vs rank050",
+    "funeral-r2 vs rank100",
+    "funeral-r3 vs rank001",
+    "funeral-r3 vs rank002",
+    "funeral-r3 vs rank003",
+    "funeral-r3 vs rank005",
+    "funeral-r3 vs rank007",
+    "funeral-r3 vs rank010",
+    "funeral-r3 vs rank020",
+    "funeral-r3 vs rank050",
+    "funeral-r3 vs rank100"
+  ],
+  "requestTypes": [
+    "text",
+    "image_url",
+    "text",
+    "text",
+    "image_url",
+    "text",
+    "text"
+  ],
+  "orderedRequestManifestSha256": "ea527fa5b5871c1aabfead8b134b0ca069b35aebc31f65e18c3b495799849f01"
+}
