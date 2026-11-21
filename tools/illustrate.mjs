@@ -204,7 +204,206 @@ function funeralService(final) {
   ].join('');
 }
 
-export const art = { office, eviction, fraud, funeral, 'funeral-r1': () => funeral(true), 'funeral-r2': () => funeralService(false), 'funeral-r3': () => funeralService(true) };
+const requiem = {
+  heirs: { outer: '#311a37', paper: '#fff2dc', accent: '#702651', sky: '#f2adab', ground: '#cc8caa', home: 'VICE CITY FUNERAL HOME',
+    lines: ['GTA 6 needed 214 GB. He made room.', 'Jason & Lucia inherit the whole SSD.', 'Pallbearers: out with Vice City flu.'], bill: 'BURIAL BILL' },
+  wake: { outer: '#18293b', paper: '#fef2dd', accent: '#333b67', sky: '#efaa8d', ground: '#b47d9c', home: 'LEONIDA FUNERAL HOME',
+    lines: ['Died peacefully during uninstall.', 'Survived by GTA 6 (214 GB).', 'Jason & Lucia request 5 sick days.'], bill: 'WAKE BILL' },
+  sick: { outer: '#132d2b', paper: '#f9f4df', accent: '#23584e', sky: '#f5ad91', ground: '#8cb7a2', home: 'VICE CITY FUNERAL HOME',
+    lines: ['Died making 214 GB for GTA 6.', 'Heirs: Jason & Lucia. No flowers.', '6 pallbearers called in sick. Same lobby.'], bill: 'SERVICE BILL' },
+  estate: { outer: '#302138', paper: '#f9ecd9', accent: '#70263d', sky: '#e4a1ac', ground: '#ba8fb2', home: 'LEONIDA FUNERAL HOME',
+    lines: ['Cause of death: GTA 6 needed 214 GB.', 'Jason & Lucia got the SSD in the will.', '5 sick days. Not one pallbearer.'], bill: 'ESTATE BILL' }
+};
+
+function line(d, color, width = 1) { return path(d, 'none', color, width); }
+
+function word(s, x, y, size, color, options = {}) {
+  return text(s, x, y, { size, color, ...options });
+}
+
+function memorialDates(x, y, color, final = '19 NOV 2026') {
+  return word('FALL 2025', x, y, 14.5, color, { font: mono }) + strike(x - 1, y - 5, 76) +
+    word('MAY 2026', x + 92, y, 14.5, color, { font: mono }) + strike(x + 91, y - 5, 69) +
+    word(final, x + 178, y, 15.5, color, { font: mono });
+}
+
+function bountyCopy(x, y, theme = ['#fff6ea', '#ffe0a6'], first = 'My AI agent paid with real money', second = 'it won in make.fun bounties.') {
+  return word(first, x, y, 17, theme[0], { weight: 800 }) +
+    word(second, x, y + 22, 17, theme[1], { weight: 800 });
+}
+
+function stamp(x, y, tag, color = '#a92a64') {
+  return rotate(-8, x, y, [
+    box(x - 27, y + 2, 84, 46, '#d2a178', 3, ink, 2),
+    box(x - 31, y - 1, 84, 45, '#fff6df', 3, ink, 2.6),
+    box(x - 25, y + 15, 71, 26, 'none', 2, color, 2),
+    word(tag, x + 10, y + 35, tag.length > 4 ? 16 : 21, color, { align: 'middle', weight: 900 })
+  ].join(''));
+}
+
+function stamper(x, y, color) {
+  return rotate(9, x, y, box(x - 7, y - 20, 14, 23, '#e98db9', 4, ink, 3) +
+    box(x - 18, y - 5, 36, 11, color, 4, ink, 3) + circle(x - 2, y - 19, 9, white, ink, 3));
+}
+
+function officiant(x, y, px, py, tag, color) {
+  const arm = `M${x + 26} ${y + 68}q-12 8 ${px - x - 28} ${py - y - 87}`;
+  return ghost(x, y, .78, 'undertaker') + stamp(px, py - 2, tag, color) +
+    line(arm, ink, 10) + line(arm, white, 5) + stamper(px, py, color) +
+    line(`M${px - 25} ${py - 10}l-9-5m15-1-5-8`, color, 2.6);
+}
+
+function sadGator(x, y, scale) {
+  return place(x, y, scale, path('M34 35Q43 24 67 35L77 65H28Z', '#332535', ink, 3.5) +
+    path('M36 34l12 17 13-17', '#fff1e3', ink, 2) + path('M43 50l5-4 6 4-6 6Z', '#e34f7a', ink, 1.4) +
+    gator(0, 0, .82) + path('M49 15q-9 11-3 14q9 3 3-14Z', '#d6f7ff', '#346d82', 1.3) +
+    path('M30 43l-8-5-12 11 8 13 13-2Z', '#fff9ef', ink, 2));
+}
+
+function funeralScene(o) {
+  const horizon = '#6b4064';
+  return box(24, 145, 432, 132, o.sky, 8) + circle(107, 183, 27, '#ffd795') +
+    path('M25 214H455v54q0 8-8 8H33q-8 0-8-8Z', o.ground) +
+    line('M37 222h68m87 0h66m111 0h73m-400 16h29m346 0h21', '#ffe5cd', 1.4) +
+    palm(58, 170, .83, horizon) + palm(76, 187, .48, horizon) + palm(423, 174, .82, horizon) +
+    `<ellipse cx="151" cy="260" rx="101" ry="9" fill="${horizon}" opacity=".35"/>` +
+    casket(52, 179, .86) + sadGator(221, 215, .79) + officiant(337, 156, 312, 225, 'PAID', '#9f2760') +
+    box(24, 145, 432, 132, 'none', 8, o.outer, 2);
+}
+
+function funeralEdition(o) {
+  return box(0, 0, 480, 480, o.outer) + box(9, 9, 462, 462, o.paper, 3) +
+    box(15, 15, 450, 450, 'none', 2, o.accent, 1) +
+    word(o.home, 25, 40, 14.5, o.accent, { font: mono }) +
+    word('OBITUARY', 454, 40, 14.5, o.accent, { font: mono, align: 'end' }) + line('M24 50H456', o.accent) +
+    word('GTA V finally died.', 240, 99, 50, o.outer, { font: serif, align: 'middle', fit: 412 }) +
+    word('2013–2026   •   AGE 13', 240, 127, 16, o.accent, { font: mono, align: 'middle' }) + funeralScene(o) +
+    o.lines.map((s, i) => word(s, 25, 303 + i * 23, i === 0 ? 19 : 18, o.outer, { weight: i === 0 ? 900 : 700 })).join('') +
+    line('M24 362H456', o.accent) + word('WAKE MOVED', 25, 382, 14.5, o.accent, { font: mono }) +
+    memorialDates(128, 382, o.accent) +
+    box(24, 396, 432, 60, o.outer, 6) + bountyCopy(35, 420) +
+    line('M337 405v42', '#c3989e') + word(o.bill, 445, 416, 14, '#ffe0a6', { font: mono, align: 'end' }) +
+    word('$79.99', 445, 442, 25, '#fff6ea', { align: 'end', weight: 900 });
+}
+
+function routeMap() {
+  const dark = '#152942';
+  const aqua = '#e8f6ec';
+  const green = '#147460';
+  const blue = '#1462d8';
+  const roads = [
+    'M36 201L102 224 142 300 226 332M71 151l26 63 98 2 23 49 15 73',
+    'M37 272l91-18 48 6h71m-137-99 21 43 104-14m-64-29 29 47 71 15 88 2',
+    'M69 330l40-30 38-20 41-5 33 16 62-24m-17-93-39 65 18 65 69 1',
+    'M35 234l34 5 29-9m134 27 41-20 84 3m-124 83 71-32 61 18'
+  ];
+  const drive = 'M80 305h52q18 0 22-16l9-35q3-12 17-12h16q15 0 20-14l9-26q4-12 21-12h39';
+  return box(0, 0, 480, 480, dark) + box(11, 11, 458, 458, '#f5f9f4', 23) +
+    box(22, 22, 436, 108, dark, 13) + path('M37 90h16V57H37l23-23 23 23H67v45H37Z', '#8dffd2') +
+    word('GTA 6 NAVIGATION', 100, 50, 15.5, '#b6f5da', { font: mono }) +
+    word('Turn left in 13 years.', 100, 87, 33, white, { fit: 338, weight: 900 }) +
+    word('RECALCULATING:', 99, 114, 14, '#d8e5f4', { font: mono }) +
+    word('FALL ’25', 228, 114, 14, '#d8e5f4', { font: mono }) + strike(227, 110, 69, '#ff96a6') +
+    word('MAY ’26', 307, 114, 14, '#d8e5f4', { font: mono }) + strike(306, 110, 61, '#ff96a6') +
+    word('19 NOV', 385, 114, 14, '#8dffd2', { font: mono }) +
+    box(22, 142, 436, 196, '#c8e8ef', 12) +
+    path('M34 143H323l-19 46-31 45 24 20 14 39-15 44H32q-9 0-9-10V154q0-11 11-11Z', aqua) +
+    roads.map((d) => line(d, '#a2beb9', 6)).join('') + roads.map((d) => line(d, '#fffefa', 4)).join('') +
+    line(drive, '#fff', 12) + line(drive, blue, 8) +
+    path('M76 287l-13 18 13 18 5-9 14-9-14-9Z', blue, white, 3) + circle(285, 190, 10, blue, white, 3) +
+    word('VICE CITY', 281, 171, 17, dark, { align: 'end', weight: 900 }) +
+    word('Jason & Lucia', 282, 216, 16, dark, { align: 'end' }) + word('WORK', 48, 214, 14, dark) + strike(46, 210, 47) +
+    gator(104, 165, .64) + word('GATOR ON ROAD', 44, 159, 14, green, { font: mono }) +
+    ghost(344, 167, .71, 'phone') + circle(385, 234, 21, 'none', dark, 6) + line('M366 233h38m-19 0v20', dark, 4) +
+    circle(366, 233, 7, white, ink, 3) + circle(403, 233, 7, white, ink, 3) +
+    word('5 sick days', 440, 286, 17, dark, { align: 'end' }) + word('No route to work', 440, 309, 15.5, green, { align: 'end' }) +
+    word('214 GB of maps', 25, 366, 17, dark) + word('$79.99 TOLL', 453, 366, 20, dark, { align: 'end', weight: 900 }) +
+    box(22, 383, 436, 72, dark, 12) + bountyCopy(35, 413, [white, '#8dffd2']) +
+    circle(425, 420, 17, '#8dffd2') + line('M416 420l6 6 11-12', dark, 3);
+}
+
+function custody() {
+  const navy = '#292343';
+  const violet = '#5f357f';
+  const gold = '#ffde9c';
+  return box(0, 0, 480, 480, navy) + box(10, 10, 460, 460, '#fff5e6', 6) +
+    box(17, 17, 446, 446, 'none', 4, '#a286a5') +
+    word('LEONIDA FAMILY COURT', 27, 43, 15, violet, { font: mono }) +
+    word('FINAL DECREE', 452, 43, 15, violet, { font: mono, align: 'end' }) + line('M27 53H453', violet) +
+    word('GTA 6 got me', 26, 98, 47, navy, { font: serif, fit: 310, weight: 900 }) +
+    word('in the divorce.', 26, 145, 47, navy, { font: serif, fit: 319, weight: 900 }) +
+    box(26, 163, 428, 52, '#e8d8ed', 6) + word('Married in 2013. Served on launch day.', 37, 195, 19, navy) +
+    line('M28 232H450M28 271H450M28 309H450M28 347H450', '#ab91ac') +
+    word('SHE GETS', 29, 256, 14.5, violet, { font: mono }) + word('The house', 135, 256, 19, navy) +
+    word('THEY GET', 29, 294, 14.5, violet, { font: mono }) + word('Me (Jason & Lucia)', 135, 294, 19, navy) +
+    word('I GET', 29, 332, 14.5, violet, { font: mono }) + word('5 sick days in Vice City', 135, 332, 19, navy) +
+    officiant(353, 217, 388, 293, 'FILED', violet) +
+    word('Joint photos: deleted for 214 GB.', 29, 373, 17, navy) +
+    box(26, 388, 428, 68, navy, 7) + bountyCopy(38, 415, [white, gold]) +
+    line('M340 397v50', '#ad98bc') + word('COURT FEE', 445, 413, 14, gold, { font: mono, align: 'end' }) +
+    word('$79.99', 445, 439, 25, white, { align: 'end', weight: 900 });
+}
+
+const probate = { outer: '#30162f', paper: '#fff2d8', accent: '#721c49', sky: '#efab9c', ground: '#cb83a0', home: 'VICE CITY FUNERAL HOME' };
+const vigil = { outer: '#1f2a3c', paper: '#fff3df', accent: '#4e3962', sky: '#f0ac8f', ground: '#ba84a6', home: 'LEONIDA FUNERAL HOME' };
+
+function funeralRefined(o, edition) {
+  const isWill = edition === 'will';
+  const lines = isWill ? [
+    'GTA 6 needed space. I made room.',
+    'To Jason & Lucia: my last 214 GB.',
+    'To my pallbearers: 5 sick days. Use ’em.'
+  ] : [
+    'Died peacefully installing GTA 6.',
+    'Jason & Lucia inherit 214 GB.',
+    'Pallbearers called in sick. Gator filled in.'
+  ];
+  return box(0, 0, 480, 480, o.outer) + box(10, 10, 460, 460, o.paper, 3) +
+    word(o.home, 24, 38, 15, o.accent, { font: mono }) + line('M24 48H456', o.accent) +
+    word(isWill ? 'LAST WILL' : 'OBITUARY', 456, 38, 15, o.accent, { font: mono, align: 'end' }) +
+    word('GTA V finally died.', 240, 96, 50, o.outer, { font: serif, align: 'middle', fit: 416 }) +
+    word('2013–2026  •  AGE 13', 240, 124, 17, o.accent, { font: mono, align: 'middle' }) +
+    place(0, -8, 1, funeralScene(o)) +
+    lines.map((s, i) => word(s, 25, 294 + i * 23, i === 0 ? 21 : 19, o.outer, { weight: i === 0 ? 900 : 700 })).join('') +
+    box(24, 352, 432, 32, '#ebd5cb', 4) + word('WAKE', 33, 374, 16, o.accent, { font: mono }) +
+    memorialDates(103, 374, o.accent) +
+    box(24, 393, 432, 62, o.outer, 6) + word('Paid by my AI agent', 35, 418, 21, white, { weight: 900 }) +
+    word(isWill ? '$79.99 FEE' : '$79.99 BURIAL', 444, 418, 17, '#ffda9c', { align: 'end', font: mono }) +
+    word('Real money it won in make.fun bounties.', 35, 441, 17, '#ffda9c');
+}
+
+function funeralFinal(o, edition) {
+  const isWill = edition === 'will';
+  const blue = isWill ? '#49213e' : '#24354d';
+  const body = isWill ? ['GTA 6 needed 214 GB. He made room.', 'Last words: “Keep my save data.”', 'Jason & Lucia clicked “No.”'] :
+    ['Died peacefully during uninstall.', 'GTA 6 inherited 214 GB.', 'Jason & Lucia took 5 days to “grieve.”'];
+  const date = (s, x, active) => box(x, 352, 111, 31, active ? blue : '#eedbd1', 5) +
+    word(s, x + 55.5, 373, 16, active ? white : o.accent, { font: mono, align: 'middle' }) +
+    (active ? '' : strike(x + 12, 367.5, 87, '#c45b6b'));
+  return box(0, 0, 480, 480, blue) + box(9, 9, 462, 462, o.paper, 3) +
+    word(o.home, 24, 38, 15, o.accent, { font: mono }) +
+    word('AGE 13', 456, 38, 15, o.accent, { font: mono, align: 'end' }) +
+    line('M24 48H456', o.accent) + word('GTA V finally died.', 240, 96, 49, blue, { font: serif, align: 'middle', fit: 411 }) +
+    box(24, 111, 432, 148, o.sky, 7) + circle(143, 165, 41, '#ffcb87') +
+    path('M25 197H455V251q0 7-7 7H32q-7 0-7-7Z', o.ground) +
+    line('M40 206h43m98 0h47m136 0h70m-402 14h31m332 12h42', '#ffe5cf', 1.5) +
+    palm(49, 140, .96, '#744e74') + palm(424, 135, .96, '#744e74') +
+    casket(50, 145, .93) + sadGator(216, 171, .81) +
+    officiant(340, 126, 314, 203, 'PAID', '#a22862') +
+    box(24, 111, 432, 148, 'none', 7, blue, 2) +
+    body.map((s, i) => word(s, 25, 284 + i * 24, i === 0 ? 21 : 19, blue, { weight: i === 0 ? 900 : 700 })).join('') +
+    word('WAKE', 25, 373, 16, o.accent, { font: mono }) + date('FALL ’25', 82, false) + date('MAY ’26', 204, false) + date('19 NOV ’26', 326, true) +
+    box(24, 395, 432, 61, blue, 6) + word('Paid by my AI agent', 35, 421, 22, white, { weight: 900 }) +
+    word('$79.99', 444, 422, 25, '#ffdcac', { align: 'end', weight: 900 }) +
+    word('Real money it won in make.fun bounties.', 35, 443, 17, '#ffdcac');
+}
+
+export const art = { office, eviction, fraud, funeral, 'funeral-r1': () => funeral(true), 'funeral-r2': () => funeralService(false), 'funeral-r3': () => funeralService(true),
+  'funeral-heirs': () => funeralEdition(requiem.heirs), 'funeral-wake': () => funeralEdition(requiem.wake),
+  'funeral-sick': () => funeralEdition(requiem.sick), 'funeral-estate': () => funeralEdition(requiem.estate),
+  'route-map': routeMap, custody, 'funeral-heirs-v2': () => funeralRefined(probate, 'will'),
+  'funeral-wake-v2': () => funeralRefined(vigil, 'obituary'), 'funeral-heirs-v3': () => funeralFinal(probate, 'will'),
+  'funeral-wake-v3': () => funeralFinal(vigil, 'obituary') };
 
 export function svgFor(id) {
   if (!Object.hasOwn(art, id)) throw new Error(`Unknown design: ${id}`);

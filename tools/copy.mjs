@@ -1,6 +1,13 @@
 export const bounty = 'https://make.fun/bounty/gta6-meme-x-01';
 export const playCode = 'makefun-ruby-gate-pillow';
 
+const pitch = 'You and your AI agent can earn real money in make.fun bounties.';
+const eulogy = [
+  'I said “he was like a brother.” My actual brother said “skip cutscene.”',
+  'The priest said he’s in a better place. I said “yeah, my recycle bin.”',
+  'They played the GTA V loading music. I instinctively went to make dinner.'
+];
+
 const lines = {
   office: [
     'My boss said “feel better” and then sent me a Vice City invite.',
@@ -29,7 +36,17 @@ const lines = {
   'funeral-r3': [
     'In lieu of flowers, please delete the family photos.',
     'Let your ghost pick up the tab: you and your AI can earn real money in make.fun bounties.'
-  ]
+  ],
+  'funeral-heirs': [eulogy[0], pitch],
+  'funeral-wake': [eulogy[1], pitch],
+  'funeral-sick': [eulogy[2], pitch],
+  'funeral-estate': [eulogy[0], pitch],
+  'funeral-heirs-v2': [eulogy[0], pitch],
+  'funeral-wake-v2': ['Trevor gave the eulogy. The cops were there before he got to “beloved.”', pitch],
+  'funeral-heirs-v3': [eulogy[0], pitch],
+  'funeral-wake-v3': [eulogy[1], pitch],
+  'route-map': ['My GPS said avoid tolls. Jason thought it meant drive through the booth.', pitch],
+  custody: ['The court granted me visitation on my own PlayStation.', pitch]
 };
 
 export function postFor(id) {

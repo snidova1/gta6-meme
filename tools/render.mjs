@@ -43,7 +43,9 @@ try {
       await document.fonts.ready;
       return Array.from(document.querySelectorAll('svg text')).flatMap((node) => {
         const b = node.getBoundingClientRect();
-        const bad = b.x < 0 || b.y < 0 || b.right > 1200 || b.bottom > 1200 || parseFloat(node.getAttribute('font-size')) < 14;
+        const matrix = node.getScreenCTM();
+        const effectivePx = parseFloat(getComputedStyle(node).fontSize) * Math.hypot(matrix.c, matrix.d) * 480 / innerWidth;
+        const bad = b.x < 0 || b.y < 0 || b.right > 1200 || b.bottom > 1200 || effectivePx < 14 - 1e-6;
         return bad ? [`${node.textContent}: ${Math.round(b.x)},${Math.round(b.y)} to ${Math.round(b.right)},${Math.round(b.bottom)}`] : [];
       });
     });

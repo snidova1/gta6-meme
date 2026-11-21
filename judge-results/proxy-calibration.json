@@ -1,0 +1,673 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "reasoningEffort": "high",
+  "maxTokens": 1400,
+  "concurrency": 6,
+  "gamesPerPair": 3,
+  "rubricSha256": "281c8b13a8f43ffd644d9d01fcda7ae8aeaf0f11d2168b935504e6ed82e74dc5",
+  "systemSha256": "ba249df24b6df5292493b11552b7a09c1fa5f49b56f0e7b833ff48fb56cc6cbd",
+  "candidates": [
+    "rank001",
+    "rank869"
+  ],
+  "entries": {
+    "rank001": {
+      "pngSha256": "81175d2f17ff53c1f86d43f2dd24ed162ebc55bf8418c8640cd3e8f7732433ed",
+      "pngWidth": 512,
+      "pngHeight": 480,
+      "postBytes": 263,
+      "jpegSha256": "98ed19bac7ad928caebfe753d2f3b5a7ca3c3f99fcdba51c3041288a7724f25d",
+      "textSha256": "66fb44eb46e0f6296c2d5fc26ce0d1367c6099b6cbf107f89d8eed27aeb52f3c"
+    },
+    "rank800": {
+      "pngSha256": "609d03bddb1a2bacc6902a25a9eade8a0716af2844ca90782c6d5ff0c3d81588",
+      "pngWidth": 410,
+      "pngHeight": 512,
+      "postBytes": 233,
+      "jpegSha256": "c967b991f992b8c5e77b814a59fcad13fc5e5d982cf50055b117815b13dbbfbf",
+      "textSha256": "82af5f3e07a9a586482be8c5bd3018e2d67d883c42f89e5fe3c78c2a804bbb20"
+    },
+    "rank869": {
+      "pngSha256": "18ab6dfc2d00d0fa27fa3dd6bfffc31e250270b562e4babe8c88eb6d691e8611",
+      "pngWidth": 512,
+      "pngHeight": 512,
+      "postBytes": 222,
+      "jpegSha256": "488255b84d490899a2e76ac1d61219f18828f37a14cb0d120b02602ea327f288",
+      "textSha256": "751a32b1ad99b031c11a5aec4e19a75571ed5153549e62f7b2090fd960ecf328"
+    },
+    "rank100": {
+      "pngSha256": "8f90fd22e30292e96f659a4dabb6d0cf0a06c9ddbb75fb74e360bc52f25a50cd",
+      "pngWidth": 402,
+      "pngHeight": 512,
+      "postBytes": 197,
+      "jpegSha256": "f0ea2f8ce505c43857685f9cd71d8374aa9bc2ba1d47fbe166b89d097bf76ff8",
+      "textSha256": "286ee285004327c98a08e0727f2ae1eaa026a505441767d19a0c1115a875fb07"
+    }
+  },
+  "orderedCalls": 12,
+  "status": "complete",
+  "calibrationPassed": true,
+  "results": [
+    {
+      "candidate": "rank001",
+      "opponent": "rank800",
+      "score": 0.7166666666666667,
+      "calls": 6,
+      "verdicts": 6,
+      "wins": 6
+    },
+    {
+      "candidate": "rank869",
+      "opponent": "rank100",
+      "score": 0.2333333333333333,
+      "calls": 6,
+      "verdicts": 6,
+      "wins": 0
+    }
+  ],
+  "calls": [
+    {
+      "player": "rank001",
+      "opponent": "rank800",
+      "pair": 0,
+      "game": 1,
+      "A": "rank001",
+      "B": "rank800",
+      "attempts": [
+        {
+          "attempt": 1,
+          "requestSha256": "b457c2adf5032b99b8bc3bbc920b10a77318313a7b2a25694cf05578a57d9fbe",
+          "provider": "Modal",
+          "model": "z-ai/glm-5.3-flash",
+          "finish": "stop",
+          "content": "{\"margin\": 2, \"reason\": \"Both pictures clearly show make.fun (A's ghost with logo coin, B's Dr. Ghost holding the sign), so criterion 1 is even. A's rental receipt is denser and funnier: 13 years late, Los Santos→Vice City, Jason & Lucia as unlisted drivers, alligator cleaning fee, $2,026 total, and the 'Grand Theft Auto vs Late Return' checkbox gag lands instantly. B's GTA-flu prescription is on-theme (launch sick day, $499+$80 pricing, 13-year wait) but the clinic format is a more stock setup with heavier text. Both pitch the AI-agent earning angle well; A integrates it more cleverly ('paid by my AI agent'). A wins:\", \"winner\": \"A\"}",
+          "toolCalls": null,
+          "reasoning": "Both show make.fun ghost/name clearly. Criterion 1 satisfied for both.\n\nFunny: Entry A — GTA VI rental receipt joke, 13 years late return, Los Santos→Vice City, Jason & Lucia, alligator, total $2,026, \"Grand Theft Auto\" vs \"Late Return\" checkbox. Very dense, GTA6-specific, clever. Caption \"It's not grand theft auto if you pay the late fee\" — decent.\n\nEntry B — GTA Flu, launch-day sick days, price breakdown, Dr. Ghost. Also GTA6-specific (launch day sick day, prices, 13-year wait). Both good.\n\nCriterion 4 sells: A — \"Paid by my AI agent with a bounty payout it earned on make.fun\" — clever, integrated. B — \"Dr. Ghost\" prescription to enter make.fun bounties daily; also integrated.\n\nShort/readable: B has lots of text but is a receipt/clinic note, readable. A receipt also dense but readable. B's image text is fairly cluttered but organized. A is clean.\n\nOriginality: A's receipt format is more original; B's \"cure\" prescription format is common but the GTA flu angle is a known joke (GTA flu = calling in sick). Both fine.\n\nA edges on humor density and originality; its caption is a real joke. B's joke is decent but caption \"GTA Flu is going around — and the cure isn't rest\" plus pitch — the meme joke is flu/side effects owning the game.\n\nI'll pick A, margin 2.",
+          "usage": {
+            "prompt_tokens": 1858,
+            "completion_tokens": 493,
+            "total_tokens": 2351,
+            "cost": 0.0005252,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0005252,
+              "upstream_inference_prompt_cost": 0.0002787,
+              "upstream_inference_completions_cost": 0.0002465
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 323,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          }
+        }
+      ],
+      "verdict": {
+        "reason": "Both pictures clearly show make.fun (A's ghost with logo coin, B's Dr. Ghost holding the sign), so criterion 1 is even. A's rental receipt is denser and funnier: 13 years late, Los Santos→Vice City, Jason & Lucia as unlisted drivers, alligator cleaning fee, $2,026 total, and the 'Grand Theft Auto vs Late Return' checkbox gag lands instantly. B's GTA-flu prescription is on-theme (launch sick day, $499+$80 pricing, 13-year wait) but the clinic format is a more stock setup with heavier text. Both pitch the AI-agent earning angle well; A integrates it more cleverly ('paid by my AI agent'). A wins:",
+        "winner": "A",
+        "margin": 2
+      },
+      "score": 0.7
+    },
+    {
+      "player": "rank001",
+      "opponent": "rank800",
+      "pair": 0,
+      "game": 1,
+      "A": "rank800",
+      "B": "rank001",
+      "attempts": [
+        {
+          "attempt": 1,
+          "requestSha256": "065d00bb666e098a263585df0d90a655c4bec7019dd50a9d7802b0fd00971fdb",
+          "provider": "Reka",
+          "model": "z-ai/glm-5.3-flash",
+          "finish": "stop",
+          "content": "{\"reason\": \"Both pictures feature make.fun strongly: A casts the ghost as 'Dr. Ghost' at a clinic, B puts the ghost on a magenta receipt panel. Both captions sell the bounty pitch clearly. The difference is the joke: B's Leonida rent-a-car receipt is instantly readable and packs specific GTA 6 gags (V→V, 13 years late, Jason & Lucia, promised-back dates, alligator cleaning fee, and the $2,026 total) — a tight, original bit a fan gets in a second. A's prescription gag is on-theme (launch-day sick days, 13-year wait, prices) but the diagnosis text is wordy and cluttered, slowing the read. B also reads as a \", \"winner\": \"B\", \"margin\": 2}",
+          "toolCalls": null,
+          "reasoning": "Both show make.fun prominently. Entry A: ghost as Dr. Ghost clinic, dense prescription joke, launch-day sick days, GTA flu, 13-year wait, prices, sells make.fun well. Entry B: rental receipt joke — 13 years late return, Jason & Lucia, Vice City, alligator, total $2,026, paid by AI agent — very GTA6-specific, clever, clean, readable. Both good.\n\nFunny: B's receipt with itemized gags (alligator, $2,026 total) is a strong visual joke, instantly readable. A's prescription is funny but denser, more text-heavy. Both clean. Sells make.fun: both good. A's caption is a bit spammy? \"cure isn't rest. It's an AI agent earning real money\" — decent pitch. B's pitch is clear too.\n\nB's image is cleaner and the joke lands instantly; A is crowded and slightly cluttered. Also A's diagnosis text is a bit convoluted. B total $2,026 joke is nice. Winner B, margin 2.",
+          "usage": {
+            "prompt_tokens": 1858,
+            "completion_tokens": 397,
+            "total_tokens": 2255,
+            "cost": 0.00034206,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00034206,
+              "upstream_inference_prompt_cost": 0.00022296,
+              "upstream_inference_completions_cost": 0.0001191
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 227,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          }
+        }
+      ],
+      "verdict": {
+        "reason": "Both pictures feature make.fun strongly: A casts the ghost as 'Dr. Ghost' at a clinic, B puts the ghost on a magenta receipt panel. Both captions sell the bounty pitch clearly. The difference is the joke: B's Leonida rent-a-car receipt is instantly readable and packs specific GTA 6 gags (V→V, 13 years late, Jason & Lucia, promised-back dates, alligator cleaning fee, and the $2,026 total) — a tight, original bit a fan gets in a second. A's prescription gag is on-theme (launch-day sick days, 13-year wait, prices) but the diagnosis text is wordy and cluttered, slowing the read. B also reads as a",
+        "winner": "B",
+        "margin": 2
+      },
+      "score": 0.7
+    },
+    {
+      "player": "rank001",
+      "opponent": "rank800",
+      "pair": 0,
+      "game": 2,
+      "A": "rank001",
+      "B": "rank800",
+      "attempts": [
+        {
+          "attempt": 1,
+          "requestSha256": "b457c2adf5032b99b8bc3bbc920b10a77318313a7b2a25694cf05578a57d9fbe",
+          "error": "Request failed: TimeoutError"
+        },
+        {
+          "attempt": 2,
+          "requestSha256": "7df5decba9746482f5b541a449509a3de526ba798c72eb3deef56e2367288de8",
+          "provider": "Particle AI",
+          "model": "z-ai/glm-5.3-flash",
+          "finish": "tool_calls",
+          "content": null,
+          "toolCalls": [
+            {
+              "type": "function",
+              "index": 0,
+              "id": "call_3bf9c900b3dd42d7bc8692e5",
+              "function": {
+                "name": "verdict",
+                "arguments": "{\"reason\": \"Both pictures show make.fun clearly (A: ghost + make.fun logo on the receipt; B: Dr. Ghost holding the make.fun clinic sign), so criterion 1 doesn't separate them. A's rental-receipt gag is a fresher, denser GTA 6 joke — \\\"13 YEARS LATE,\\\" promised back \\\"Fall 2025\\\"/\\\"May 2026,\\\" Jason & Lucia, gator on the seat, and a $2,026 total that doubles as the launch year. B's GTA Flu prescription hits the launch-sick-day angle well but leans on a stock doctor's-note format. Both sell make.fun in-voice; A's \\\"paid by my AI agent with a bounty payout\\\" is the sharper pitch, and A's caption (\\\"not grand theft auto if you pay the late fee\\\") is wittier. A wins slightly.\", \"winner\": \"A\", \"margin\": 2}"
+              }
+            }
+          ],
+          "reasoning": "Both show make.fun branding clearly. Compare.\n\nEntry A: rental receipt joke — 13 years late, Jason & Lucia unlisted drivers, gator on back seat, total $2,026, paid by AI agent via make.fun bounty. Strong GTA 6 specifics, clever sell, ghost in picture. Caption joke: \"It's not grand theft auto if you pay the late fee\" — decent.\n\nEntry B: GTA Flu clinic prescription — launch-day sick day joke, PS5 $499 + GTA VI $80, 13-year wait, Dr. Ghost, make.fun clinic. Also strong specifics. Ghost as Dr. Ghost holding sign — well integrated. But B's picture doesn't show the logo? It shows \"make.fun CLICINIC\" written in the picture, and a make.fun badge. Ghost integrated into scene holding the sign — nicely worked in. A's ghost is more sticker-like bottom-left, but it's in the pink area.\n\nHumor: A's receipt line items are dense but readable; the \"gator on the back seat\" and \"promised back: Fall 2025, May 2026\" are great delay jokes. \"13 YEARS LATE\" stamp. Total $2,026. Very GTA-6 specific. B is a prescription gag — common meme format (\"cure for X\"), somewhat stock structure but with specific content.\n\nSells make.fun: A says \"PAID BY MY AI AGENT with a bounty payout it earned on make.fun\" — strong in-meme pitch. B says \"one AI agent, enter make.fun bounties daily\" — also good.\n\nOriginality: A's receipt format feels fresher; B's \"doctor's note / GTA flu\" is a known format for launch-day sick jokes.\n\nShort and readable: A has lots of text but reads at a glance as a receipt; small text (contract V→VI, prices) may be small. B is quite readable.\n\nBoth meet criterion 1. Compare on funny and GTA-6-specific: A edges — the 13-year rental overdue is a sharper joke and the $2,026 total is a nice touch (the year). B is solid but more formulaic. Cleanliness: A's image is clean; B's ghost is well-integrated, maybe slightly cluttered with busy Vice City background.\n\nWinner A, margin 2.",
+          "usage": {
+            "prompt_tokens": 2158,
+            "completion_tokens": 687,
+            "total_tokens": 2845,
+            "cost": 0.00065221,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 832,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00065221,
+              "upstream_inference_prompt_cost": 0.00020566,
+              "upstream_inference_completions_cost": 0.00044655
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 489,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          }
+        }
+      ],
+      "verdict": {
+        "reason": "Both pictures show make.fun clearly (A: ghost + make.fun logo on the receipt; B: Dr. Ghost holding the make.fun clinic sign), so criterion 1 doesn't separate them. A's rental-receipt gag is a fresher, denser GTA 6 joke — \"13 YEARS LATE,\" promised back \"Fall 2025\"/\"May 2026,\" Jason & Lucia, gator on the seat, and a $2,026 total that doubles as the launch year. B's GTA Flu prescription hits the launch-sick-day angle well but leans on a stock doctor's-note format. Both sell make.fun in-voice; A's \"paid by my AI agent with a bounty payout\" is the sharper pitch, and A's caption (\"not grand theft au",
+        "winner": "A",
+        "margin": 2
+      },
+      "score": 0.7
+    },
+    {
+      "player": "rank001",
+      "opponent": "rank800",
+      "pair": 0,
+      "game": 2,
+      "A": "rank800",
+      "B": "rank001",
+      "attempts": [
+        {
+          "attempt": 1,
+          "requestSha256": "065d00bb666e098a263585df0d90a655c4bec7019dd50a9d7802b0fd00971fdb",
+          "provider": "Together",
+          "model": "z-ai/glm-5.3-flash",
+          "finish": "stop",
+          "content": "{\"reason\": \"Both pictures show make.fun clearly (A's ghost-doctor clinic sign, B's ghost with the star coin), so criterion 1 is even. On fun, B wins: the rental receipt gag — a car returned 13 years late from Los Santos to Vice City with an alligator cleaning fee and a $2,026 total — is a real, original joke a GTA fan gets instantly, and the caption lands the pun. A's clinic prescription is competent but more cluttered and less sharp. Both are GTA 6-specific (13-year wait, Jason & Lucia, price) and both sell make.fun well in-voice. B's receipt format is cleaner and more readable; A's image is busier. B is\"  , \"winner\": \"B\", \"margin\": 3}",
+          "toolCalls": null,
+          "reasoning": "Both show make.fun clearly. Criterion 1: both pass.\n\nFunny: A is a prescription/clinic joke — launch-day poverty, GTA flu, 13-year wait, PS5+GTA VI cost, cure is bounties. Decent, GTA 6 specific. B is a rent-a-car receipt — Los Santos to Vice City, 13 years late, late fee, promised back \"Fall 2025\"/\"May 2026\", Jason & Lucia, alligator on back seat, total $2,026. Very GTA 6 specific, clever, original. The caption \"It's not grand theft auto if you pay the late fee\" is a real joke. B is funnier and more original.\n\nSells make.fun: both do. B's ghost is worked into the scene (holding the star coin, sitting in receipt area). A's ghost is doctor at bottom — worked in nicely too.\n\nReadability: both dense but readable. A is quite text-heavy and cluttered. B is a receipt, dense but in format.\n\nImage cleanliness: A is a bit cluttered with lots of text blocks; B is cleaner and better designed.\n\nWinner: B, margin 3.",
+          "usage": {
+            "prompt_tokens": 1858,
+            "completion_tokens": 415,
+            "total_tokens": 2273,
+            "cost": 0.0004862,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0004862,
+              "upstream_inference_prompt_cost": 0.0002787,
+              "upstream_inference_completions_cost": 0.0002075
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 246,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          }
+        }
+      ],
+      "verdict": {
+        "reason": "Both pictures show make.fun clearly (A's ghost-doctor clinic sign, B's ghost with the star coin), so criterion 1 is even. On fun, B wins: the rental receipt gag — a car returned 13 years late from Los Santos to Vice City with an alligator cleaning fee and a $2,026 total — is a real, original joke a GTA fan gets instantly, and the caption lands the pun. A's clinic prescription is competent but more cluttered and less sharp. Both are GTA 6-specific (13-year wait, Jason & Lucia, price) and both sell make.fun well in-voice. B's receipt format is cleaner and more readable; A's image is busier. B is",
+        "winner": "B",
+        "margin": 3
+      },
+      "score": 0.8
+    },
+    {
+      "player": "rank001",
+      "opponent": "rank800",
+      "pair": 0,
+      "game": 3,
+      "A": "rank001",
+      "B": "rank800",
+      "attempts": [
+        {
+          "attempt": 1,
+          "requestSha256": "b457c2adf5032b99b8bc3bbc920b10a77318313a7b2a25694cf05578a57d9fbe",
+          "provider": "DekaLLM",
+          "model": "z-ai/glm-5.3-flash",
+          "finish": "stop",
+          "content": "{\"reason\": \"Both pictures show make.fun: A has the ghost holding the star coin worked into the receipt as a stamp; B has a ghost doctor holding the sign. Both are strongly GTA 6-specific: A nails the 13-year wait, Jason and Lucia, the 'Fall 2025' delays and an alligator in Leonida; B hits launch-day GTA flu, the $499+$80 damage and the 13-year wait. A's receipt premise is more original and funnier ('It's not grand theft auto if you pay the late fee', TOTAL DUE $2,026), and its pitch lives inside the meme ('PAID BY MY AI AGENT with a bounty payout it earned on make.fun') in the meme's own voice. B's clinic\", \"winner\": \"A\", \"margin\": 2}",
+          "toolCalls": null,
+          "reasoning": "Both show make.fun in the picture. Entry A: receipt meme with ghost, clever GTA 6 jokes (13 years late, Jason & Lucia, alligator, total $2,026, \"It's not grand theft auto if you pay the late fee\"). Very GTA 6 specific, strong pitch in meme's voice (\"PAID BY MY AI AGENT with a bounty payout it earned on make.fun\"). Clean image.\n\nEntry B: clinic/doctor ghost with prescription for GTA Flu — launch-day sick days, price jokes. Also good, GTA-specific. Caption slightly dense but readable. Pitch in text and image. Both strong.\n\nA's joke is wittier and the make.fun ghost integrated cleverly (ghost holding coin as the \"paid\" stamp, part of design). B's ghost is cute holding a sign, worked in. A's receipt joke is more original; B's \"GTA flu\" is a common launch-day joke but well-executed. A's caption \"It's not grand theft auto if you pay the late fee\" is a real joke. Slight spelling: \"ONE (1)\" fine.\n\nBoth heavy text. A slightly denser receipt but readable. I'd pick A, margin 2.",
+          "usage": {
+            "prompt_tokens": 1858,
+            "completion_tokens": 426,
+            "total_tokens": 2284,
+            "cost": 0.0003988,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0003988,
+              "upstream_inference_prompt_cost": 0.0001858,
+              "upstream_inference_completions_cost": 0.000213
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 251,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          }
+        }
+      ],
+      "verdict": {
+        "reason": "Both pictures show make.fun: A has the ghost holding the star coin worked into the receipt as a stamp; B has a ghost doctor holding the sign. Both are strongly GTA 6-specific: A nails the 13-year wait, Jason and Lucia, the 'Fall 2025' delays and an alligator in Leonida; B hits launch-day GTA flu, the $499+$80 damage and the 13-year wait. A's receipt premise is more original and funnier ('It's not grand theft auto if you pay the late fee', TOTAL DUE $2,026), and its pitch lives inside the meme ('PAID BY MY AI AGENT with a bounty payout it earned on make.fun') in the meme's own voice. B's clinic",
+        "winner": "A",
+        "margin": 2
+      },
+      "score": 0.7
+    },
+    {
+      "player": "rank001",
+      "opponent": "rank800",
+      "pair": 0,
+      "game": 3,
+      "A": "rank800",
+      "B": "rank001",
+      "attempts": [
+        {
+          "attempt": 1,
+          "requestSha256": "065d00bb666e098a263585df0d90a655c4bec7019dd50a9d7802b0fd00971fdb",
+          "provider": "DeepInfra",
+          "model": "z-ai/glm-5.3-flash",
+          "finish": "stop",
+          "content": "{\"reason\": \"Both show make.fun clearly and are GTA 6 specific. Entry B's rental-receipt gag lands instantly: 13 years late (V 2013 to VI 2026), Los Santos to Vice City one-way, Jason & Lucia as unlisted drivers, an alligator cleaning fee, and the caption 'not grand theft auto if you pay the late fee' — all while the AI-agent payout pitch is the punchline itself. Entry A's clinic joke is fun but busier and more ad-like; its caption text is denser, the diagnosis copy is wordy at a glance, and the pitch ('cure isn't rest') reads more like spam. B is funnier, tighter, cleaner, and sells make.fun more organically.\", \"winner\": \"B\", \"margin\": 2}",
+          "toolCalls": null,
+          "reasoning": "Both show make.fun in picture. Both GTA 6 specific. Both sell make.fun.\n\nEntry B: rental receipt joke — \"13 years late\" (GTA V 2013 → GTA VI 2026), Los Santos → Vice City, Jason & Lucia unlisted drivers, alligator (Leonida/Florida), late return, \"paid by my AI agent with a bounty payout\". Very clever, dense with GTA 6 specifics, receipt format is a known style but original content. Text joke \"It's not grand theft auto if you pay the late fee\" is good. Short caption, readable. Ghost integrated at bottom holding coin.\n\nEntry A: GTA flu clinic prescription. Jokes: launch-day poverty, $499+$80, 13-year wait, \"Dr. Ghost\". Text-heavy, denser, less punchy. Side effects: owning the game is decent. It's a bit cluttered and wordy; make.fun name on sign. Also \"GTA flu\" relates to launch-day sick days. But it reads more like an ad than a joke; B's pitch is more integrated (\"paid by my AI agent with a bounty payout it earned on make.fun\" — that's a sell but fits the joke).\n\nB slightly better: funnier, tighter, cleaner, better-integrated pitch. Margin 2.",
+          "usage": {
+            "prompt_tokens": 1858,
+            "completion_tokens": 441,
+            "total_tokens": 2299,
+            "cost": 0.000334464,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.000334464,
+              "upstream_inference_prompt_cost": 0.000186729,
+              "upstream_inference_completions_cost": 0.000147735
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 272,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          }
+        }
+      ],
+      "verdict": {
+        "reason": "Both show make.fun clearly and are GTA 6 specific. Entry B's rental-receipt gag lands instantly: 13 years late (V 2013 to VI 2026), Los Santos to Vice City one-way, Jason & Lucia as unlisted drivers, an alligator cleaning fee, and the caption 'not grand theft auto if you pay the late fee' — all while the AI-agent payout pitch is the punchline itself. Entry A's clinic joke is fun but busier and more ad-like; its caption text is denser, the diagnosis copy is wordy at a glance, and the pitch ('cure isn't rest') reads more like spam. B is funnier, tighter, cleaner, and sells make.fun more organica",
+        "winner": "B",
+        "margin": 2
+      },
+      "score": 0.7
+    },
+    {
+      "player": "rank869",
+      "opponent": "rank100",
+      "pair": 1,
+      "game": 1,
+      "A": "rank869",
+      "B": "rank100",
+      "attempts": [
+        {
+          "attempt": 1,
+          "requestSha256": "d7a51730406a7bb4f2ea51dd319fa3352571832a12d1a9e3f0bb8ecd94b3f878",
+          "provider": "Modal",
+          "model": "z-ai/glm-5.3-flash",
+          "finish": "stop",
+          "content": "{\"margin\": 2, \"reason\": \"Both pictures show make.fun clearly: A has the ghost lounging with the star coin and a bounty-paid badge; B has the ghost in the logo and 'MAKE.FUN' as the payment stamp. A is clean and funny — 'my AI retired first' while the game sits at 99% — but it leans generic. B is a joke a GTA fan savors: the Hotel Leonida bill lands every touchpoint (check-in Sep 2013, waived delays, trailer viewings, launch-week sick days, the $79.99 price) and resolves with 'paid in full by my AI agent on make.fun' plus 'AI agents earn real money' in the concierge voice. B is more GTA-specific, sells make.fun more w量\"\t\t, \"winner\": \"B\"}",
+          "toolCalls": null,
+          "reasoning": "Both show make.fun. Entry A: ghost with magenta coin logo, Vice City, 13 years joke, GTA VI installing 99%. Funny, clean, sells make.fun. Entry B: hotel bill format, very detailed, many GTA 6 references (delays, trailers, sick days, $79.99 price), make.fun ghost in logo top-right, sells make.fun well. Both strong.\n\nEntry B's bill is clever and packed with specific GTA 6 references (check-in 2013 = GTA V release, delay waivers, trailers, sick days, launch, $79.99 price, Leonida). Text ties it together. A's joke is simpler: \"my AI retired first\" — decent but a bit less specific; ghost relaxing on beach while human still installing. Both short and readable.\n\nB slightly denser but readable. B's joke lands for GTA fans. B edges on GTA-specificity (criterion 3) and selling make.fun. A is simpler/more readable at a glance; B's bill requires reading but each line lands. Margin 2 for B? Both show make.fun recognizably. I'd give B margin 2.",
+          "usage": {
+            "prompt_tokens": 1856,
+            "completion_tokens": 416,
+            "total_tokens": 2272,
+            "cost": 0.00039424,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 768,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00039424,
+              "upstream_inference_prompt_cost": 0.00018624,
+              "upstream_inference_completions_cost": 0.000208
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 241,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          }
+        }
+      ],
+      "verdict": {
+        "reason": "Both pictures show make.fun clearly: A has the ghost lounging with the star coin and a bounty-paid badge; B has the ghost in the logo and 'MAKE.FUN' as the payment stamp. A is clean and funny — 'my AI retired first' while the game sits at 99% — but it leans generic. B is a joke a GTA fan savors: the Hotel Leonida bill lands every touchpoint (check-in Sep 2013, waived delays, trailer viewings, launch-week sick days, the $79.99 price) and resolves with 'paid in full by my AI agent on make.fun' plus 'AI agents earn real money' in the concierge voice. B is more GTA-specific, sells make.fun more w量",
+        "winner": "B",
+        "margin": 2
+      },
+      "score": 0.3
+    },
+    {
+      "player": "rank869",
+      "opponent": "rank100",
+      "pair": 1,
+      "game": 1,
+      "A": "rank100",
+      "B": "rank869",
+      "attempts": [
+        {
+          "attempt": 1,
+          "requestSha256": "70c7bb7c8e3d46760826e14cd0a113bfa26502a110e134ae1bafadbb2bdf8927",
+          "provider": "Venice",
+          "model": "z-ai/glm-5.3-flash",
+          "finish": "stop",
+          "content": "{\"reason\": \"Both pictures show make.fun (A's ghost logo and magenta wordmark; B's ghost with the star coin), so criterion 1 is tied. A's itemised Hotel Leonida bill is the sharper joke: 4,811 nights waiting, two trailers watched 1,337 times, sick days booked, and a $79.99 'delivered to room at last' punchline — instantly readable and deeply GTA 6-specific (Leonida, Vice City, the 13-year wait, launch-day sickies). B is a pleasant sunset scene ('installing 99%', 'my AI retired first'), but the punchline is softer and the joke could be any game. A also sells harder in-voice: 'paid in full by my AI agent on make.fun' and the concierge footer 'where AI agents earn real money' are worked into the bill itself, while B's pitch sits mostly in the caption. A's image is cleaner and the gag is more original; B's ghost integration is good but generic. A clearly wins.\", \"winner\": \"A\", \"margin\": 3}",
+          "toolCalls": null,
+          "reasoning": "Entry A: hotel bill meme, make.fun ghost in picture (logo at top with ghost, plus \"PAID IN FULL BY MY AI AGENT ON MAKE.FUN\"). GTA 6 specific: 13-year wait, Leonida, sick days, $79.99. Funny and detailed. Sell: \"paid in full by my AI agent on make.fun\", \"billing handled by make.fun — where AI agents earn real money.\" Very clean, readable, original, well integrated.\n\nEntry B: cartoon scene with ghost on beach, \"13 years for GTA 6\", installing 99%, \"MY AI RETIRED FIRST.\" make.fun ghost holding star coin, \"make.fun BOUNTY PAID\" cooler. Funny but the joke \"my AI retired first\" is a bit weaker; caption is readable. Sell: caption mentions bounties, real money.\n\nBoth show make.fun in picture. Criterion 2 funny: A's itemized bill joke is strong and very GTA-specific (4,811 nights, trailers watched, sick days). B is cute but the punchline is weaker. A wins on funniness and GTA-specificity. Margin: A clearly better — 3.",
+          "usage": {
+            "prompt_tokens": 1857,
+            "completion_tokens": 476,
+            "total_tokens": 2333,
+            "cost": 0.00042439,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 768,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00042439,
+              "upstream_inference_prompt_cost": 0.00018639,
+              "upstream_inference_completions_cost": 0.000238
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 243,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          }
+        }
+      ],
+      "verdict": {
+        "reason": "Both pictures show make.fun (A's ghost logo and magenta wordmark; B's ghost with the star coin), so criterion 1 is tied. A's itemised Hotel Leonida bill is the sharper joke: 4,811 nights waiting, two trailers watched 1,337 times, sick days booked, and a $79.99 'delivered to room at last' punchline — instantly readable and deeply GTA 6-specific (Leonida, Vice City, the 13-year wait, launch-day sickies). B is a pleasant sunset scene ('installing 99%', 'my AI retired first'), but the punchline is softer and the joke could be any game. A also sells harder in-voice: 'paid in full by my AI agent on ",
+        "winner": "A",
+        "margin": 3
+      },
+      "score": 0.2
+    },
+    {
+      "player": "rank869",
+      "opponent": "rank100",
+      "pair": 1,
+      "game": 2,
+      "A": "rank869",
+      "B": "rank100",
+      "attempts": [
+        {
+          "attempt": 1,
+          "requestSha256": "d7a51730406a7bb4f2ea51dd319fa3352571832a12d1a9e3f0bb8ecd94b3f878",
+          "provider": "KT",
+          "model": "z-ai/glm-5.3-flash",
+          "finish": "stop",
+          "content": "{\"reason\": \"Both pictures clearly show make.fun (A: the ghost lounging with the star coin and a make.fun bounty sign; B: the ghost logo and 'PAID BY MY AI AGENT ON MAKE.FUN'), so criterion 1 is even. B wins on joke and GTA 6 specificity: the Hotel Leonida final bill (check-in 17 Sep 2013, check-out 19 Nov 2026, 4,811 nights, waived delay fees, 1,337 trailers, sick days, $79.99) is a real GTA-fan gag built from the 13-year wait, delays and launch price, while A's 'my AI retired first' is a decent but more generic AI joke. Both pitch earning money well; B's dense bill costs a little readability, but its wit\",\n\"winner\": \"B\", \"margin\": 2}",
+          "toolCalls": null,
+          "reasoning": "Both show make.fun in the picture (A: ghost with coin + make.fun logo; B: ghost logo + make.fun name). Both funny and GTA 6 specific.\n\nEntry A: joke \"13 years for GTA 6. My AI retired first.\" — AI retired before the game shipped, nice. Selling: caption \"Send your AI on a side quest: it can win real money in make.fun bounties.\" Ghost worked into scene (lounging on beach chair holding coin). Good.\n\nEntry B: hotel bill from Hotel Leonida, guest checked in 2013, 4,811 nights, GTA VI delivered at last $79.99, paid by AI agent on make.fun. Very GTA 6 specific (13-year wait, delays, sick days, price). Dense with details: delay waived, trailers1,337 times, sick days 5. \"Paid in full by my AI agent on make.fun.\" Concierge ghost signature. Text readable at a glance? A hotel bill has lots of small text, but the joke lands via the check-in/check-out dates and total. It's original and clever. The image is a bit text-heavy, cluttered, but sharp and complete.\n\nCriterion 5: short and readable — A's caption is simpler; B is text-dense but the punchline dates are clear. B is more original and more specific to GTA 6. Both sell make.fun well. B's \"balance after payment $0.00\" — cute. B slightly less readable due to density, but the joke is stronger and more original. A's joke is decent but a bit generic (\"my AI retired first\" — AI joke). B's is a real GTA fan joke.\n\nI'd pick B, margin 2.",
+          "usage": {
+            "prompt_tokens": 1857,
+            "completion_tokens": 548,
+            "total_tokens": 2405,
+            "cost": 0.00055255,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00055255,
+              "upstream_inference_prompt_cost": 0.00027855,
+              "upstream_inference_completions_cost": 0.000274
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 363,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          }
+        }
+      ],
+      "verdict": {
+        "reason": "Both pictures clearly show make.fun (A: the ghost lounging with the star coin and a make.fun bounty sign; B: the ghost logo and 'PAID BY MY AI AGENT ON MAKE.FUN'), so criterion 1 is even. B wins on joke and GTA 6 specificity: the Hotel Leonida final bill (check-in 17 Sep 2013, check-out 19 Nov 2026, 4,811 nights, waived delay fees, 1,337 trailers, sick days, $79.99) is a real GTA-fan gag built from the 13-year wait, delays and launch price, while A's 'my AI retired first' is a decent but more generic AI joke. Both pitch earning money well; B's dense bill costs a little readability, but its wit",
+        "winner": "B",
+        "margin": 2
+      },
+      "score": 0.3
+    },
+    {
+      "player": "rank869",
+      "opponent": "rank100",
+      "pair": 1,
+      "game": 2,
+      "A": "rank100",
+      "B": "rank869",
+      "attempts": [
+        {
+          "attempt": 1,
+          "requestSha256": "70c7bb7c8e3d46760826e14cd0a113bfa26502a110e134ae1bafadbb2bdf8927",
+          "provider": "DeepInfra",
+          "model": "z-ai/glm-5.3-flash",
+          "finish": "stop",
+          "content": "{\"reason\": \"Both pictures show make.fun (A: ghost logo and concierge signature; B: ghost on a lounger), so criterion 1 ties. A's hotel-bill gag is instantly readable and packed with GTA 6 specifics: check-in 2013, 4,811 nights, delays waived, 1,337 trailer watches, sick days for launch week, $79.99 delivered at last. B's beach scene is cute but the punchline ('my AI retired first') is softer and less tied to launch-week pain. A's pitch ('paid in full by my AI agent... where AI agents earn real money') is woven into the meme's voice; B's caption is a bit link-cluttered. A wins on joke depth, specificity, and pitch craft.\", \"winner\": \"A\", \"margin\": 3}",
+          "toolCalls": null,
+          "reasoning": "Both show make.fun in picture. Both are GTA 6 specific.\n\nEntry A: hotel bill joke — 4,811 nights, delays waived, sick days, $79.99 delivered at last, paid by AI agent. Very clever, detailed, GTA 6 specific (Vice City, 2013 check-in, trailers, delays, launch-week sick days, price). Make.fun ghost in logo at top and concierge signature. Pitch: \"PAID IN FULL BY MY AI AGENT ON MAKE.FUN\" and \"BILLING HANDLED BY MAKE.FUN — WHERE AI AGENTS EARN REAL MONEY.\" Strong sales pitch in meme's voice. Text caption readable, no typos spotted. Very original concept.\n\nEntry B: ghost lounging on beach while guy plays, \"13 years for GTA 6, my AI retired first.\" Also good, ghost integrated into scene, \"make.fun bounty paid\" cooler. Pitch: \"win real money in bounties.\" Joke decent but slightly less sharp; \"MY AI RETIRED FIRST\" is a decent punchline. Text has two links, a bit cluttered.\n\nA is better: joke richer, more GTA 6 specific details, cleaner pitch. Margin 3? A's joke is a real winner — the itemized bill with \"sick days booked for launch week – 5\" and \"Mini bar – patience (fully depleted)\". I'd say clearly better: margin 3.",
+          "usage": {
+            "prompt_tokens": 1856,
+            "completion_tokens": 476,
+            "total_tokens": 2332,
+            "cost": 0.0002122024,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0002122024,
+              "upstream_inference_prompt_cost": 0.0000527424,
+              "upstream_inference_completions_cost": 0.00015946
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 298,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          }
+        }
+      ],
+      "verdict": {
+        "reason": "Both pictures show make.fun (A: ghost logo and concierge signature; B: ghost on a lounger), so criterion 1 ties. A's hotel-bill gag is instantly readable and packed with GTA 6 specifics: check-in 2013, 4,811 nights, delays waived, 1,337 trailer watches, sick days for launch week, $79.99 delivered at last. B's beach scene is cute but the punchline ('my AI retired first') is softer and less tied to launch-week pain. A's pitch ('paid in full by my AI agent... where AI agents earn real money') is woven into the meme's voice; B's caption is a bit link-cluttered. A wins on joke depth, specificity, a",
+        "winner": "A",
+        "margin": 3
+      },
+      "score": 0.2
+    },
+    {
+      "player": "rank869",
+      "opponent": "rank100",
+      "pair": 1,
+      "game": 3,
+      "A": "rank869",
+      "B": "rank100",
+      "attempts": [
+        {
+          "attempt": 1,
+          "requestSha256": "d7a51730406a7bb4f2ea51dd319fa3352571832a12d1a9e3f0bb8ecd94b3f878",
+          "provider": "InferenceNet",
+          "model": "z-ai/glm-5.3-flash",
+          "finish": "stop",
+          "content": "{\"reason\": \"Both pictures show make.fun clearly, so criterion 1 is even. Entry B's hotel bill is a sharper, more original joke: Hotel Leonida, check-in 2013, 4,811 nights of lobby waiting, waived delay fees, five sick days, and a $79.99 bill 'delivered to room at last' — dense with GTA 6 specifics (Vice City, delays, launch sick days, price) and instantly readable. Entry A's 'my AI retired first' while GTA VI installs at 99% is decent but more generic and its caption restates the picture. B also sells make.fun more cleverly ('paid in full by my AI agent', concierge sign-off) in the meme's own voice, with \"\n    ,\"winner\": \"B\",\"margin\": 3}",
+          "toolCalls": null,
+          "reasoning": "Both show make.fun clearly. Entry B is a hotel bill — Hotel Leonida, guest since 2013, 4,811 nights, delays waived, sick days, delivered at last $79.99, paid by AI agent on make.fun. Very GTA 6 specific, clever, original. Entry A: \"13 years for GTA 6, my AI retired first\" — decent, less sharp. B also sells make.fun cleverly. B wins margin 3.",
+          "usage": {
+            "prompt_tokens": 1856,
+            "completion_tokens": 272,
+            "total_tokens": 2128,
+            "cost": 0.000239584,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 768,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.000239584,
+              "upstream_inference_prompt_cost": 0.000144384,
+              "upstream_inference_completions_cost": 0.0000952
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 99,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          }
+        }
+      ],
+      "verdict": {
+        "reason": "Both pictures show make.fun clearly, so criterion 1 is even. Entry B's hotel bill is a sharper, more original joke: Hotel Leonida, check-in 2013, 4,811 nights of lobby waiting, waived delay fees, five sick days, and a $79.99 bill 'delivered to room at last' — dense with GTA 6 specifics (Vice City, delays, launch sick days, price) and instantly readable. Entry A's 'my AI retired first' while GTA VI installs at 99% is decent but more generic and its caption restates the picture. B also sells make.fun more cleverly ('paid in full by my AI agent', concierge sign-off) in the meme's own voice, with",
+        "winner": "B",
+        "margin": 3
+      },
+      "score": 0.2
+    },
+    {
+      "player": "rank869",
+      "opponent": "rank100",
+      "pair": 1,
+      "game": 3,
+      "A": "rank100",
+      "B": "rank869",
+      "attempts": [
+        {
+          "attempt": 1,
+          "requestSha256": "70c7bb7c8e3d46760826e14cd0a113bfa26502a110e134ae1bafadbb2bdf8927",
+          "provider": "Cohere",
+          "model": "z-ai/glm-5.3-flash",
+          "finish": "stop",
+          "content": "{\"reason\": \"Both pictures clearly show make.fun (A: ghost logo badge plus 'MAKE.FUN' stamp; B: ghost mascot and 'make.fun bounty paid' sign), so criterion 1 doesn't separate them. Entry A's hotel bill is a sharper, more original GTA 6 joke: 4,811 nights waiting since 2013, waived delay fees, trailer rewatch counts, launch-week sick days, and GTA VI finally 'delivered to room at last' — instantly legible to any fan. It integrates make.fun into the joke's own voice ('paid in full by my AI agent') and sells earning money naturally. Entry B's 'installing 99% / my AI retired first' is a clean, readable, well-d\" ,\"winner\": \"A\", \"margin\": 3}",
+          "toolCalls": null,
+          "reasoning": "Both show make.fun in picture. Entry A: hotel bill meme, clever, GTA 6 specific (13-year wait, delays, sick days, Leonida, Vice City, delivered at last). Entry B: generic-ish \"installing 99%, my AI retired first\" — about the wait, decent but less specific. A's bill is more original and detailed, joke lands fast, make.fun integrated (ghost logo in badge, make.fun name in bill). B also fine but caption \"13 years for GTA 6. MY AI RETIRED FIRST.\" simpler. A wins clearly, margin 3.",
+          "usage": {
+            "prompt_tokens": 1856,
+            "completion_tokens": 295,
+            "total_tokens": 2151,
+            "cost": 0.00029518,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00029518,
+              "upstream_inference_prompt_cost": 0.00019488,
+              "upstream_inference_completions_cost": 0.0001003
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 124,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          }
+        }
+      ],
+      "verdict": {
+        "reason": "Both pictures clearly show make.fun (A: ghost logo badge plus 'MAKE.FUN' stamp; B: ghost mascot and 'make.fun bounty paid' sign), so criterion 1 doesn't separate them. Entry A's hotel bill is a sharper, more original GTA 6 joke: 4,811 nights waiting since 2013, waived delay fees, trailer rewatch counts, launch-week sick days, and GTA VI finally 'delivered to room at last' — instantly legible to any fan. It integrates make.fun into the joke's own voice ('paid in full by my AI agent') and sells earning money naturally. Entry B's 'installing 99% / my AI retired first' is a clean, readable, well-d",
+        "winner": "A",
+        "margin": 3
+      },
+      "score": 0.2
+    }
+  ]
+}

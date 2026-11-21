@@ -1,19 +1,22 @@
 import { createHash } from 'node:crypto';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { parseArgs } from 'node:util';
 import { openChrome, judgeJpeg } from './chrome.mjs';
 
 export const model = 'z-ai/glm-5.3-flash';
 export const ranks = [1, 2, 3, 5, 7, 10, 20, 50, 100];
 const initial = ['office', 'eviction', 'fraud', 'funeral'];
-const api = 'https://openrouter.ai/api/v1/chat/completions';
+const defaultUrl = 'http://127.0.0.1:8788/api/v1/chat/completions';
 const project = fileURLToPath(new URL('../', import.meta.url));
 const refsDir = process.env.MEME_REF_DIR || join(project, '../meme-ref');
 const rulesPath = process.env.MAKEFUN_RULES || join(project, '../gta6-meme-x-01-kit/RULES.txt');
 const resultsDir = join(project, 'judge-results');
 const digest = (s) => createHash('sha256').update(s).digest('hex');
 const rankId = (r) => `rank${String(r).padStart(3, '0')}`;
+const opponents = ranks.map(rankId);
+const top10 = ranks.filter((r) => r <= 10).map(rankId);
 const mean = (values) => values.length ? values.reduce((a, b) => a + b, 0) / values.length : null;
 const fixed = (n) => n == null ? '—' : n.toFixed(3);
 
@@ -111,21 +114,29 @@ export function scoreFor(verdict, side) {
   return verdict ? (5 + (verdict.winner === side ? verdict.margin : -verdict.margin)) / 10 : 0.5;
 }
 
-async function callJudge(system, a, b, key) {
+export async function callJudge(system, a, b, url = process.env.JUDGE_URL || defaultUrl) {
   const attempts = [];
   for (let i = 0; i < 2; i++) {
     const request = JSON.stringify(requestFor(system, a, b, i));
     const meta = { attempt: i + 1, requestSha256: digest(request) };
     try {
-      const res = await fetch(api, {
+      const res = await fetch(url, {
         method: 'POST', redirect: 'error', signal: AbortSignal.timeout(90_000),
-        headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' }, body: request
+        headers: { 'Content-Type': 'application/json' }, body: request
       });
       if (!res.ok) {
-        await res.body?.cancel();
-        attempts.push({ ...meta, error: `HTTP ${res.status}` });
+        let detail;
+        if (res.status === 402) {
+          const answer = await res.json().catch(() => null);
+          const message = answer?.error?.message ?? answer?.message ?? answer?.error;
+          if (typeof message === 'string') {
+            if (/spend(?:ing)? limit|budget|quota/i.test(message)) detail = 'budget-or-limit';
+            else if (/credit|balance|fund/i.test(message)) detail = 'credits-or-balance';
+          }
+        } else await res.body?.cancel();
+        attempts.push({ ...meta, error: `HTTP ${res.status}`, detail });
         if ([400, 413, 422].includes(res.status)) continue;
-        return { attempts, verdict: null, fatal: `OpenRouter HTTP ${res.status}` };
+        return { attempts, verdict: null, fatal: `Judge proxy HTTP ${res.status}` };
       }
       const answer = await res.json();
       // Keep only judge fields, not arbitrary HTTP bodies or request headers.
@@ -138,7 +149,7 @@ async function callJudge(system, a, b, key) {
       if (verdict) return { attempts, verdict };
     } catch (error) {
       attempts.push({ ...meta, error: `Request failed: ${error.name}` });
-      if (i === 1) return { attempts, verdict: null, fatal: 'OpenRouter did not return a readable response' };
+      if (i === 1) return { attempts, verdict: null, fatal: 'Judge proxy did not return a readable response' };
     }
   }
   return { attempts, verdict: null };
@@ -151,10 +162,10 @@ function xIdentity(url) {
   return { handle: match[1], posted: new Date(Number((BigInt(match[2]) >> 22n) + 1288834974657n)).toISOString() };
 }
 
-async function entriesFor(ids) {
+async function entriesFor(ids, posted) {
   const refs = JSON.parse(await readFile(join(refsDir, 'refs.json'), 'utf8'));
   const current = xIdentity(JSON.parse(await readFile(join(project, 'POST.json'), 'utf8')).url);
-  const posted = process.env.CANDIDATE_POSTED || new Date().toISOString();
+
   const browser = await openChrome();
   const entries = new Map();
   try {
@@ -190,54 +201,91 @@ function rowMetrics(calls, player, opponent) {
   };
 }
 
-function printTable(calls, ids, opponents) {
+export function tournamentMetrics(calls, ids) {
+  return ids.map((candidate) => {
+    const games = Object.fromEntries(opponents.map((r) => [r, rowMetrics(calls, candidate, r)]));
+    const meanFor = (rivals) => rivals.every((r) => games[r].score !== null) ? mean(rivals.map((r) => games[r].score)) : null;
+    return { candidate, games, top10Mean: meanFor(top10), mean: meanFor(opponents) };
+  });
+}
+
+export function pairOrders(player, opponent, pair, games) {
+  return Array.from({ length: games }, (_, offset) => {
+    const game = offset + 1;
+    return [{ player, opponent, pair, game, A: player, B: opponent }, { player, opponent, pair, game, A: opponent, B: player }];
+  }).flat();
+}
+
+function printTable(calls, ids) {
   console.log(['Candidate', ...opponents, 'Top 10', 'All'].join('\t'));
-  for (const id of ids) {
-    const scores = opponents.map((rival) => rowMetrics(calls, id, rival).score);
-    console.log([id, ...scores.map(fixed), fixed(mean(scores.filter((s, i) => s !== null && ranks.slice(0, 6).map(rankId).includes(opponents[i])))), fixed(mean(scores.filter((s) => s !== null)))].join('\t'));
+  for (const row of tournamentMetrics(calls, ids)) {
+    console.log([row.candidate, ...opponents.map((r) => fixed(row.games[r].score)), fixed(row.top10Mean), fixed(row.mean)].join('\t'));
   }
 }
 
 async function save(name, data) {
   await mkdir(resultsDir, { recursive: true });
-  await writeFile(join(resultsDir, `${name}.json`), `${JSON.stringify(data, null, 2)}\n`);
+  const file = join(resultsDir, `${name}.json`);
+  const temp = `${file}.${process.pid}.tmp`;
+  await writeFile(temp, `${JSON.stringify(data, null, 2)}\n`);
+  await rename(temp, file);
 }
 
 async function main(args) {
   const [command, ...rest] = args;
-  const dry = rest.includes('--dry-run');
-  const ids = rest.filter((id) => id !== '--dry-run');
+  if (!['calibrate', 'tournament', 'report'].includes(command)) throw new Error('Usage: node tools/judge.mjs calibrate|tournament [--games N] [--concurrency N] [--name ID] [--dry-run | --resume] [candidates...] | report [--partial] result-name...');
+  const { values, positionals: ids } = parseArgs({ args: rest, allowPositionals: true, options: {
+    'dry-run': { type: 'boolean' }, resume: { type: 'boolean' }, partial: { type: 'boolean' }, games: { type: 'string' }, concurrency: { type: 'string' }, name: { type: 'string' }
+  } });
+  const dry = values['dry-run'];
   const eligible = ids.length ? ids : initial;
-  const opponents = ranks.map(rankId);
   const calibration = [['rank001', 'rank800'], ['rank869', 'rank100']];
   if (command === 'report') {
-    if (!ids.length) throw new Error('Use report with one or more tournament result names');
+    if (!ids.length || Object.keys(values).some((key) => key !== 'partial')) throw new Error('Use report [--partial] with one or more tournament result names');
     const results = await Promise.all(ids.map((id) => {
       if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new Error('Invalid result name');
       return readFile(join(resultsDir, `${id}.json`), 'utf8').then(JSON.parse);
     }));
-    printTable(results.flatMap((result) => result.calls), [...new Set(results.flatMap((result) => result.candidates))], opponents);
+    const calls = results.flatMap((result) => {
+      if (result.status === 'complete' && result.results?.every((row) => row.games)) return result.calls;
+      if (!values.partial || !['blocked', 'in-progress'].includes(result.status) || !result.gamesPerPair || !result.calls?.every((call) => opponents.includes(call.opponent))) {
+        throw new Error('Expected a completed tournament; use report --partial to inspect a tournament checkpoint');
+      }
+      const scored = result.calls.filter((call) => !call.fatal);
+      const complete = Object.values(Object.groupBy(scored, (call) => call.pair)).filter((pair) => pair.length === 2 * result.gamesPerPair).flat();
+      console.log(`Partial run: ${scored.length}/${result.orderedCalls} ordered calls; showing only pairs with all ${result.gamesPerPair} games.`);
+      return complete;
+    });
+    printTable(calls, [...new Set(results.flatMap((result) => result.candidates))]);
     return;
   }
-  if (!['calibrate', 'tournament'].includes(command)) throw new Error('Usage: node tools/judge.mjs calibrate [--dry-run] | tournament [--dry-run] [candidate IDs...] | report result-name...');
-  const runName = command === 'calibrate' ? 'calibration' : (ids.length ? `tournament-${ids.join('-')}` : 'tournament-initial');
-  const key = process.env.OPENROUTER_API_KEY;
-  if (!dry && !key) {
-    await save(`${runName}-blocked`, { status: 'blocked', reason: 'OPENROUTER_API_KEY not present in process environment', model, matchesScored: 0 });
-    throw new Error('OPENROUTER_API_KEY is not present in the judge process environment');
-  }
+  if (values.partial) throw new Error('--partial is only for report');
+  const positiveInteger = (value, option) => {
+    const number = Number(value);
+    if (!/^\d+$/.test(value) || !Number.isSafeInteger(number) || number < 1) throw new Error(`--${option} needs a positive integer`);
+    return number;
+  };
+  const games = positiveInteger(values.games ?? (command === 'calibrate' ? '6' : '1'), 'games');
+  const concurrency = positiveInteger(values.concurrency ?? '6', 'concurrency');
+  if (command === 'calibrate' && ids.length) throw new Error('Calibration takes no candidate IDs');
+  if (new Set(eligible).size !== eligible.length || eligible.some((id) => !/^[a-z][a-z0-9-]*$/.test(id) || /^rank\d{3}$/.test(id))) throw new Error('Candidate IDs must be valid and unique');
+  const runName = values.name ?? (command === 'calibrate' ? 'calibration' : (ids.length ? `tournament-${ids.join('-')}` : 'tournament-initial'));
+  if (!/^[a-z][a-z0-9-]{0,179}$/.test(runName)) throw new Error('Invalid or too long result name; use --name ID');
+  if (dry && values.resume) throw new Error('--dry-run and --resume cannot be combined');
+  const previous = values.resume ? JSON.parse(await readFile(join(resultsDir, `${runName}.json`), 'utf8')) : null;
+  if (previous && !['blocked', 'in-progress'].includes(previous.status)) throw new Error('Only an unfinished run can be resumed');
+  const candidatePosted = previous?.candidatePosted ?? (process.env.CANDIDATE_POSTED || new Date().toISOString());
   if (!dry && command === 'tournament') {
     const recorded = await readFile(join(resultsDir, 'calibration.json'), 'utf8').then(JSON.parse).catch(() => null);
     if (recorded?.status !== 'complete' || !recorded?.calibrationPassed) throw new Error('Run and pass calibrate before collecting tournament scores');
   }
-  const pairs = command === 'calibrate' ? Array.from({ length: 6 }, () => calibration).flat() : eligible.flatMap((id) => opponents.map((r) => [id, r]));
-  const entries = await entriesFor(new Set(pairs.flat()));
+  const pairs = command === 'calibrate' ? calibration : eligible.flatMap((id) => opponents.map((r) => [id, r]));
+  const entries = await entriesFor(new Set(pairs.flat()), candidatePosted);
   const rubric = extractRubric(await readFile(rulesPath, 'utf8'));
   const system = `${rubric}\n\n${format}`;
-  const jobs = pairs.flatMap(([player, opponent], pair) => [
-    { player, opponent, pair, A: player, B: opponent }, { player, opponent, pair, A: opponent, B: player }
-  ]);
-  const config = { model, reasoningEffort: 'high', maxTokens: 1400, concurrency: 6, rubricSha256: digest(rubric), systemSha256: digest(system),
+  const groups = pairs.map(([player, opponent], pair) => pairOrders(player, opponent, pair, games));
+  const jobs = groups.flat();
+  const config = { model, reasoningEffort: 'high', maxTokens: 1400, concurrency, gamesPerPair: games, candidatePosted, rubricSha256: digest(rubric), systemSha256: digest(system),
     candidates: command === 'calibrate' ? calibration.map(([a]) => a) : eligible,
     entries: Object.fromEntries([...entries].map(([id, entry]) => [id, entry.info])), orderedCalls: jobs.length };
   if (dry) {
@@ -251,31 +299,62 @@ async function main(args) {
     console.log(`${runName}: verified ${entries.size} entries and built ${jobs.length} ordered requests; no API calls made`);
     return;
   }
-  const calls = [];
-  let fatal;
-  for (let start = 0; start < jobs.length; start += 6) {
-    const batch = await Promise.all(jobs.slice(start, start + 6).map(async (job) => {
-      const result = await callJudge(system, entries.get(job.A), entries.get(job.B), key);
-      return { ...job, ...result, score: scoreFor(result.verdict, job.A === job.player ? 'A' : 'B') };
-    }));
-    calls.push(...batch);
-    fatal = batch.find((item) => item.fatal)?.fatal;
-    await save(runName, { ...config, status: fatal ? 'blocked' : 'in-progress', calls });
-    console.log(`${runName}: ${calls.length}/${jobs.length} calls; ${calls.filter((x) => x.verdict).length} verdicts`);
-    if (fatal) throw new Error(fatal);
+  const callId = ({ pair, game, A }) => `${pair}/${game}/${A}`;
+  const jobIds = new Set(jobs.map(callId));
+  const priorCalls = new Map();
+  const interruptions = [...(previous?.interruptions ?? [])];
+  if (previous) {
+    for (const key of ['model', 'gamesPerPair', 'systemSha256', 'entries', 'orderedCalls']) {
+      if (JSON.stringify(config[key]) !== JSON.stringify(previous[key])) throw new Error(`Cannot resume: ${key} changed`);
+    }
+    for (const call of previous.calls) {
+      if (!jobIds.has(callId(call)) || priorCalls.has(callId(call))) throw new Error('Cannot resume: invalid checkpoint call');
+      if (call.fatal) interruptions.push(call);
+      else priorCalls.set(callId(call), call);
+    }
   }
-  const results = command === 'calibrate' ? calibration.map(([a, b]) => ({ candidate: a, opponent: b, ...rowMetrics(calls, a, b) })) : eligible.map((id) => {
-    const games = Object.fromEntries(opponents.map((r) => [r, rowMetrics(calls, id, r)]));
-    const scores = Object.values(games).map((row) => row.score);
-    return { candidate: id, games, top10Mean: scores.slice(0, 6).every((s) => s !== null) ? mean(scores.slice(0, 6)) : null,
-      mean: scores.every((s) => s !== null) ? mean(scores) : null };
+  const byPair = groups.map(() => []);
+  const snapshotCalls = () => jobs.flatMap((job) => {
+    const call = priorCalls.get(callId(job)) ?? byPair[job.pair].find((item) => callId(item) === callId(job));
+    return call ? [call] : [];
   });
-  const calibrationPassed = command === 'calibrate' ? results[0].wins > 6 && results[1].verdicts - results[1].wins > 6 && results[0].score > .5 && results[1].score < .5 : undefined;
-  await save(runName, { ...config, status: 'complete', calibrationPassed, results, calls });
+  let nextPair = 0;
+  let fatal;
+  let checkpoint = Promise.resolve();
+  await Promise.all(Array.from({ length: Math.min(concurrency, groups.length) }, async () => {
+    while (!fatal && nextPair < groups.length) {
+      const pair = nextPair++;
+      if (groups[pair].every((job) => priorCalls.has(callId(job)))) continue;
+      for (const job of groups[pair]) {
+        if (fatal) break;
+        if (priorCalls.has(callId(job))) continue;
+        const result = await callJudge(system, entries.get(job.A), entries.get(job.B));
+        byPair[pair].push({ ...job, ...result, score: result.fatal ? null : scoreFor(result.verdict, job.A === job.player ? 'A' : 'B') });
+        fatal ??= result.fatal;
+        if (job.B === job.player || fatal) {
+          checkpoint = checkpoint.then(async () => {
+            const calls = snapshotCalls();
+            await save(runName, { ...config, status: fatal ? 'blocked' : 'in-progress', interruptions, calls });
+          });
+          await checkpoint;
+        }
+      }
+      const snapshot = snapshotCalls();
+      console.log(`${runName}: ${snapshot.length}/${jobs.length} calls; ${snapshot.filter((x) => x.verdict).length} verdicts`);
+    }
+  }));
+  const calls = snapshotCalls();
+  if (fatal) {
+    await save(runName, { ...config, status: 'blocked', interruptions, calls });
+    throw new Error(fatal);
+  }
+  const results = command === 'calibrate' ? calibration.map(([a, b]) => ({ candidate: a, opponent: b, ...rowMetrics(calls, a, b) })) : tournamentMetrics(calls, eligible);
+  const calibrationPassed = command === 'calibrate' ? results[0].wins > games && results[1].verdicts - results[1].wins > games && results[0].score > .5 && results[1].score < .5 : undefined;
+  await save(runName, { ...config, status: 'complete', calibrationPassed, interruptions, results, calls });
   if (command === 'calibrate') {
     console.table(results);
     if (!calibrationPassed) throw new Error('Calibration did not recover the expected ordering on a majority of ordered calls');
-  } else printTable(calls, eligible, opponents);
+  } else printTable(calls, eligible);
 }
 
 if (process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url) {
